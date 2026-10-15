@@ -2,7 +2,7 @@
 
 **A local 3D scene-change system for two phone videos of the same room.** It reconstructs each clip with VGGT, aligns the scenes in a relative coordinate frame, tracks recognized object categories across sampled frames, and exports the evidence. It presents only supported `moved`, `unchanged`, `added`, and `removed` object tracks; weak or incomplete hypotheses are suppressed rather than shown as changes.
 
-> **Model license:** the default `facebook/VGGT-1B` checkpoint is CC BY-NC 4.0 (non-commercial). The official code provides a separate `facebook/VGGT-1B-Commercial` checkpoint that requires an application. Do not use the default weights for commercial work. After obtaining access, select the commercial checkpoint with `ROOMCHANGE_VGGT_MODEL=facebook/VGGT-1B-Commercial` before launching the app. The code repository can be published; model weights and videos are never committed.
+> **Model license:** the default `facebook/VGGT-1B` checkpoint is CC BY-NC 4.0 (non-commercial). The official code provides a separate `facebook/VGGT-1B-Commercial` checkpoint that requires an application. Do not use the default weights for commercial work. After obtaining access, select the commercial checkpoint with `ROOMCHANGE_VGGT_MODEL=facebook/VGGT-1B-Commercial` before launching the app. The code repository can be published. Model weights and raw local recordings are never committed; the curated sample clips under examples/ are included.
 
 ## Start on Windows
 
@@ -40,7 +40,7 @@ The interface checks readability, frame count, resolution, duration and sharpnes
 
 ### Important limits
 
-- The example recording pair demonstrates object events from one private room pair; it does not provide a labeled ground-truth benchmark. A person or cropped object should not be interpreted as a room-object change.
+- The example pair demonstrates object events from one room; it does not provide a labeled ground-truth benchmark. A person or cropped object should not be interpreted as a room-object change.
 - Its output is a 3D surface difference hypothesis. Visibility is now approximated using camera projection and per-pixel depth support, but is not a complete ray-tracing or visibility solution. Registration, pose or depth errors may still create false event labels. Treat confidence as geometric support confidence, not calibrated event probability; uncertain candidates should not be treated as detected changes.
 - It does not claim exact instance identity. Same-category objects can be confused, and category-track displacement is a relative-coordinate hypothesis.
 - COCO, OWLv2 and ImageNet return model scores, not calibrated event probabilities. Persistent tracks need median COCO score ≥0.70 or median OWLv2 score ≥0.25; OWLv2 scores are not directly comparable to COCO scores. Common room-object prompts are built in; optional user prompts can extend recognition, but may introduce false positives.
@@ -52,7 +52,7 @@ The interface checks readability, frame count, resolution, duration and sharpnes
 
 ## Results
 
-See [examples/demo_results.md](examples/demo_results.md) for a concise replay result and its evidence limits. The source room videos and generated frame previews are intentionally excluded because they show a private indoor space.
+The public example inputs are [before.mp4](examples/before.mp4) and [after.mp4](examples/after.mp4); [examples/demo_results.md](examples/demo_results.md) summarizes the replay.
 
 Each successful run creates a private `outputs/run_<timestamp>/` folder:
 
@@ -108,7 +108,7 @@ VGGT provides multi-view point maps, camera poses, depth and confidence without 
 ## Before uploading
 
 - Run `powershell -ExecutionPolicy Bypass -File .\scripts\prepare_github_upload.ps1` to build a clean `github_upload/` folder containing only source, tests, docs, and setup files. Upload the contents of that folder through GitHub's web interface, preserving the `roomchange/`, `scripts/`, `tests/`, and `examples/` paths.
-- The staging script excludes `.venv/`, `vendor/`, `outputs/`, `recordings/`, model checkpoints, setup logs, and private room footage. `.gitignore` also excludes these local files for Git-based uploads.
+- The staging script includes Markdown and MP4 examples from `examples/` and excludes `.venv/`, `vendor/`, `outputs/`, raw `recordings/`, model checkpoints, and setup logs. `.gitignore` excludes raw recordings and generated artifacts while allowing the curated example clips.
 - Review the README and demo against what you personally ran. Be prepared to explain the alignment, evidence gates, failure cases, and what you would improve next.
 - AI coding assistance was used during development. Describe your own contributions and assistance accurately in the application; do not claim work you did not personally do or understand.
 - The default VGGT-1B checkpoint is non-commercial. Review the model terms before sharing model outputs or using the checkpoint outside a non-commercial challenge context.
