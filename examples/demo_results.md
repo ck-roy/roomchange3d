@@ -11,7 +11,7 @@ This example summarizes the latest local replay of the two room videos. The reco
 | Chair | Unchanged | Persistent category tracks in both clips; 3D centers differ by 0.2677 relative scene units, within the configured 0.30 matching threshold. |
 | Laptop | Moved | Persistent tracks in both clips; 3D centers differ by 0.373 relative scene units, beyond the 0.30 matching threshold. |
 
-Alignment passed with 0.786 inlier overlap and 0.0322 relative-unit RMSE. Analysis took 88.3 seconds on CUDA in this local run. The scene scale is arbitrary; these distances are not metres.
+Alignment passed with 0.786 inlier overlap and 0.0322 relative-unit RMSE. Analysis took 77.6 seconds on CUDA in this local run. The scene scale is arbitrary; these distances are not metres.
 
 The current code requires at least three consecutive interior detections in both recordings before reporting a moved or unchanged match. A desk track in this replay was omitted because its detections touched the frame edge throughout; it was not turned into an event based on that incomplete view.
 
