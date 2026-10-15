@@ -1,6 +1,6 @@
 # Example output: local room-pair replay
 
-This example summarizes the latest local replay of the two room videos. The recordings and sampled image previews are excluded because they show a private indoor space. The values below are model outputs from that pair, not ground-truth accuracy measurements.
+This example summarizes the replay of [before.mp4](before.mp4) and [after.mp4](after.mp4). The clips are included as example inputs. Extracted image previews are not committed. The values below are model outputs from that pair, not ground-truth accuracy measurements.
 
 ## Reported object tracks
 
@@ -24,4 +24,4 @@ The current code requires at least three consecutive interior detections in both
 
 ## Reproduce
 
-On Windows, run `START_HERE.bat`, upload the before and after clips, leave the optional extra-object prompt field blank for built-in categories, and choose **Analyse Scene Changes**. Review the event evidence and alignment status. Keep private videos and generated frame previews out of a public repository.
+On Windows, run `START_HERE.bat`, upload `examples/before.mp4` as Recording A and `examples/after.mp4` as Recording B, leave the optional extra-object prompt field blank for built-in categories, and choose **Analyse Scene Changes**. Review the event evidence and alignment status. The run creates an interactive 3D scene and results bundle under `outputs/`.
