@@ -33,7 +33,7 @@ foreach ($name in $rootFiles) {
 foreach ($directory in @('examples', 'roomchange', 'scripts', 'tests')) {
   $sourceRoot = Join-Path $root $directory
   $files = Get-ChildItem -LiteralPath $sourceRoot -File -Recurse | Where-Object {
-    if ($directory -eq 'examples') { $_.Extension -eq '.md' }
+    if ($directory -eq 'examples') { $_.Extension -in @('.md', '.mp4') }
     else { $_.Extension -in @('.py', '.ps1', '.md') }
   }
   foreach ($file in $files) {
